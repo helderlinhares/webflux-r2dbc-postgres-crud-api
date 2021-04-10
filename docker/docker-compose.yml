@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ITEM_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-Jv1XBJ@rq6J$}
+    ports:
+      - "5432:5432"
+    restart: unless-stopped

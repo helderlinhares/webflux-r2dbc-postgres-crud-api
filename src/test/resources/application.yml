@@ -1,0 +1,7 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://mock/postgres
+    username: USER_MOCK
+    password:
+  flyway:
+    enabled: false

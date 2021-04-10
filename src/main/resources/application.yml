@@ -1,0 +1,22 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/postgres
+    username: ITEM_USER
+    password: Jv1XBJ@rq6J$
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: ${spring.r2dbc.username}
+    password: ${spring.r2dbc.password}
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    me:
+      hl:
+        api: DEBUG
