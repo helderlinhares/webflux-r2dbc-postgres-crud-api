@@ -27,7 +27,7 @@ class ItemService( private val itemRepository: ItemRepository) {
 
     fun delete(id: Long) = findById(id)
         .flatMap {
-            itemRepository.deleteById(it.id)
+            itemRepository.deleteById(it.id!!)
         }.also{
             logger.debug("Processed delete($id).")
         }

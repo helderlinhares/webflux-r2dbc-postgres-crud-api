@@ -19,4 +19,4 @@ logging:
   level:
     me:
       hl:
-        api: DEBUG
+        webfluxapi: DEBUG

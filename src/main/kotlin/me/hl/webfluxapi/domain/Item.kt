@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table
 data class Item (
     @Id
     @Column("ID_ITEM")
-    val id: Long = 0,
+    val id: Long?,
     @Column("TXT_NAME")
     var name: String
 )

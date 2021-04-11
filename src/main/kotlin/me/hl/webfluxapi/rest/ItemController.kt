@@ -45,4 +45,4 @@ data class ItemRequest(
     val name: String?
 )
 
-fun ItemRequest.toDomain() = Item(name=name!!)
+fun ItemRequest.toDomain() = Item(name=name!!, id=null)

@@ -4,7 +4,7 @@
 
 This is a simple example of a Reactive Project using Kotlin and Spring Webflux to create, edit, delete and find an item.
 
-This project also uses a PostgreSQL R2DBC Driver to connect Reactively on the Database.
+This project also uses a PostgreSQL R2DBC Driver to support Reactive connection on the Database.
 
 ### Technical Info
 
@@ -39,6 +39,7 @@ OBS: You can also use your IDE to run Gradle tasks.
 
 First thing you need to do is prepare your database.
 you can do that by using docker compose on docker folder as detailed on `Using Docker Compose` session of this document.
+
 With your database already prepared you just use the command below to Run the project:
 
 ```console
@@ -50,6 +51,7 @@ OBS: You can also use your IDE to run the Project.
 ## Using Flyway
 
 Flyway will create and populate the database when the application starts.
+
 If for some reason you need to perform a manual migration, use the command:
 
 ```console
@@ -61,6 +63,7 @@ OBS: You can also use your IDE to run Gradle tasks.
 ## Using Docker Compose
 
 In Tab "Terminal" access the folder `docker` and type `docker-compose up -d {{service_name}}`.
+
 After that, the service will be available in a docker container.
 
 Useful Commands:
