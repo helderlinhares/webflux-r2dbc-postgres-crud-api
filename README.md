@@ -21,13 +21,13 @@ This project also uses a PostgreSQL R2DBC Driver to support Reactive connection 
 
 ## Building from Source
 
-To clean/build the project from console use the command:
+To clean/build the project from the console use the command:
 
 ```console
     gradle clean build
 ```
 
-To run only tests from console use the command:
+To run only tests from the console use the command:
 
 ```console
     gradle test
@@ -37,8 +37,9 @@ OBS: You can also use your IDE to run Gradle tasks.
 
 ## Running the project
 
-First thing you need to do is prepare your database.
-you can do that by using docker compose on docker folder as detailed on `Using Docker Compose` session of this document.
+The first thing you need to do is prepare your database.
+
+You can do that by using docker compose on docker folder as detailed on `Using Docker Compose` session of this document.
 
 With your database already prepared you just use the command below to Run the project:
 
