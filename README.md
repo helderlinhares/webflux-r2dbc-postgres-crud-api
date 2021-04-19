@@ -85,8 +85,5 @@ To import the collection on Postman:
 2. Click on `Upload Files` button (`File` tab)
 3. Select `webflux-api/postman/webflux-api.postman_collection.json` file to import. 
 
-## Considerations for Windows users
-
-If you are using windows you will need to start `Docker Desktop` before running docker command.
 
 Try to use `gradlew` instead of `gradle` on commands.
