@@ -84,6 +84,3 @@ To import the collection on Postman:
 1. Select the Menu `File > Import`
 2. Click on `Upload Files` button (`File` tab)
 3. Select `webflux-api/postman/webflux-api.postman_collection.json` file to import. 
-
-
-Try to use `gradlew` instead of `gradle` on commands.
