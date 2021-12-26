@@ -2,7 +2,7 @@ package me.hl.webfluxapi.rest
 
 import me.hl.webfluxapi.domain.Item
 import me.hl.webfluxapi.exception.ErrorCode
-import me.hl.webfluxapi.service.ItemService
+import me.hl.webfluxapi.domain.ItemService
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,7 +20,7 @@ import javax.validation.constraints.Size
 
 @RestController
 @RequestMapping("/items", produces = [MediaType.APPLICATION_JSON_VALUE])
-internal class ItemController(private val itemService: ItemService){
+internal class ItemController(private val itemService: ItemService) {
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun createItem(@Valid @RequestBody itemRequest: ItemRequest) = itemService.create(itemRequest.toDomain())
@@ -45,4 +45,4 @@ data class ItemRequest(
     val name: String?
 )
 
-fun ItemRequest.toDomain() = Item(name=name!!, id=null)
+fun ItemRequest.toDomain() = Item(name = name!!, id = null)

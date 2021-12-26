@@ -10,7 +10,7 @@ import me.hl.webfluxapi.domain.Item
 import me.hl.webfluxapi.exception.ErrorCode
 import me.hl.webfluxapi.exception.ErrorResponse
 import me.hl.webfluxapi.exception.ItemNotFoundException
-import me.hl.webfluxapi.service.ItemService
+import me.hl.webfluxapi.domain.ItemService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
@@ -39,7 +39,7 @@ class ItemControllerTest {
     private lateinit var messageSource: MessageSource
 
     @Test
-    fun `Should return Item When Item exists`(){
+    fun `Should return Item When Item exists`() {
         val item = buildItem()
         given(itemService.findById(ITEM_DEFAULT_ID)).willReturn(Mono.just(item))
 
@@ -53,7 +53,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should return Item list When at least one Item exists`(){
+    fun `Should return Item list When at least one Item exists`() {
         val item = buildItem()
         given(itemService.findAll()).willReturn(Flux.just(item))
 
@@ -67,7 +67,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should return empty list When no Item exists`(){
+    fun `Should return empty list When no Item exists`() {
         given(itemService.findAll()).willReturn(Flux.empty())
 
         webTestClient.get()
@@ -80,7 +80,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should return NotFound When search for an Item that does not exists`(){
+    fun `Should return NotFound When search for an Item that does not exists`() {
         given(itemService.findById(ITEM_DEFAULT_ID)).willReturn(Mono.error(ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND)))
 
         webTestClient.get()
@@ -93,7 +93,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should create Item`(){
+    fun `Should create Item`() {
         val item = buildItem()
         val itemRequest = buildItemRequest().toDomain()
         given(itemService.create(itemRequest)).willReturn(Mono.just(item))
@@ -108,7 +108,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should update Item When Item exists`(){
+    fun `Should update Item When Item exists`() {
         val item = buildModifiedItem()
         val itemRequest = buildAlternativeItemRequest().toDomain()
         given(itemService.update(ITEM_DEFAULT_ID, itemRequest)).willReturn(Mono.just(item))
@@ -123,9 +123,15 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should return NotFound When try to update an Item that does not exists`(){
+    fun `Should return NotFound When try to update an Item that does not exists`() {
         val itemRequest = buildAlternativeItemRequest()
-        given(itemService.update(ITEM_DEFAULT_ID, itemRequest.toDomain())).willReturn(Mono.error(ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND)))
+        given(itemService.update(ITEM_DEFAULT_ID, itemRequest.toDomain())).willReturn(
+            Mono.error(
+                ItemNotFoundException(
+                    ErrorCode.ITEM_NOT_FOUND
+                )
+            )
+        )
 
         webTestClient.put()
             .uri("/items/$ITEM_DEFAULT_ID")
@@ -137,7 +143,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should delete Item When Item exists`(){
+    fun `Should delete Item When Item exists`() {
         given(itemService.delete(ITEM_DEFAULT_ID)).willReturn(Mono.empty())
 
         webTestClient.delete()
@@ -147,7 +153,7 @@ class ItemControllerTest {
     }
 
     @Test
-    fun `Should return NotFound When try to delete an Item that does not exists`(){
+    fun `Should return NotFound When try to delete an Item that does not exists`() {
         given(itemService.delete(ITEM_DEFAULT_ID)).willReturn(Mono.error(ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND)))
 
         webTestClient.delete()

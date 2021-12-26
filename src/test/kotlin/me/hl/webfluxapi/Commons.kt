@@ -10,8 +10,8 @@ import me.hl.webfluxapi.rest.ItemRequest
 import org.springframework.context.MessageSource
 import java.util.Locale
 
-fun buildItem() = Item(ITEM_DEFAULT_ID, "Item $.ITEM_DEFAULT_ID")
-fun buildItemRequest() = ItemRequest("Item $.ITEM_DEFAULT_ID")
+fun buildItem() = Item(ITEM_DEFAULT_ID, "Item $ITEM_DEFAULT_ID")
+fun buildItemRequest() = ItemRequest("Item $ITEM_DEFAULT_ID")
 fun buildModifiedItem() = Item(ITEM_DEFAULT_ID, "Item $ITEM_ALTERNATIVE_ID")
 fun buildAlternativeItemRequest() = ItemRequest("Item $ITEM_ALTERNATIVE_ID")
 fun buildNotFoundResponse(messageSource:MessageSource) = ErrorResponse(listOf(

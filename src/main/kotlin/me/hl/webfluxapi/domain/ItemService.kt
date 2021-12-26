@@ -1,19 +1,17 @@
-package me.hl.webfluxapi.service
+package me.hl.webfluxapi.domain
 
-import me.hl.webfluxapi.domain.Item
 import me.hl.webfluxapi.exception.ErrorCode
 import me.hl.webfluxapi.exception.ItemNotFoundException
-import me.hl.webfluxapi.repository.ItemRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
-class ItemService( private val itemRepository: ItemRepository) {
+class ItemService(private val itemRepository: ItemRepository) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    fun create(item: Item): Mono<Item> = itemRepository.save(item).also{
+    fun create(item: Item): Mono<Item> = itemRepository.save(item).also {
         logger.debug("Processed create(${item}).")
     }
 
@@ -21,14 +19,14 @@ class ItemService( private val itemRepository: ItemRepository) {
         .flatMap {
             it.name = item.name
             itemRepository.save(it)
-        }.also{
+        }.also {
             logger.debug("Processed update($id, ${item}).")
         }
 
     fun delete(id: Long) = findById(id)
         .flatMap {
             itemRepository.deleteById(it.id!!)
-        }.also{
+        }.also {
             logger.debug("Processed delete($id).")
         }
 

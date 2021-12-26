@@ -7,7 +7,8 @@ import me.hl.webfluxapi.buildItemRequest
 import me.hl.webfluxapi.buildModifiedItem
 import me.hl.webfluxapi.exception.ErrorCode
 import me.hl.webfluxapi.exception.ItemNotFoundException
-import me.hl.webfluxapi.repository.ItemRepository
+import me.hl.webfluxapi.domain.ItemRepository
+import me.hl.webfluxapi.domain.ItemService
 import me.hl.webfluxapi.rest.toDomain
 import org.junit.Test
 import org.mockito.BDDMockito.given
@@ -24,7 +25,7 @@ class ItemServiceTest {
     private val itemService = ItemService(itemRepository)
 
     @Test
-    fun `Should return Item When Item exists`(){
+    fun `Should return Item When Item exists`() {
         val item = buildItem()
         given(itemRepository.findById(ITEM_DEFAULT_ID)).willReturn(Mono.just(item))
 
@@ -35,7 +36,7 @@ class ItemServiceTest {
     }
 
     @Test
-    fun `Should return Item list When at least one Item exists`(){
+    fun `Should return Item list When at least one Item exists`() {
         val item = buildItem()
         given(itemRepository.findAll()).willReturn(Flux.just(item))
 
@@ -46,7 +47,7 @@ class ItemServiceTest {
     }
 
     @Test
-    fun `Should return empty list When no Item exists`(){
+    fun `Should return empty list When no Item exists`() {
         given(itemRepository.findAll()).willReturn(Flux.empty())
 
         StepVerifier.create(itemService.findAll())
@@ -55,19 +56,19 @@ class ItemServiceTest {
     }
 
     @Test
-    fun `Should return ItemNotFoundException When search for an Item that does not exists`(){
+    fun `Should return ItemNotFoundException When search for an Item that does not exists`() {
         given(itemRepository.findById(ITEM_DEFAULT_ID)).willReturn(Mono.empty())
 
         StepVerifier.create(itemService.findById(ITEM_DEFAULT_ID))
             .expectNextCount(0)
-            .expectErrorMatches{
+            .expectErrorMatches {
                 it is ItemNotFoundException && it.message == ErrorCode.ITEM_NOT_FOUND
             }
             .verify()
     }
 
     @Test
-    fun `Should create Item`(){
+    fun `Should create Item`() {
         val item = buildItem()
         val itemRequest = buildItemRequest().toDomain()
         given(itemRepository.save(itemRequest)).willReturn(Mono.just(item))
@@ -80,7 +81,7 @@ class ItemServiceTest {
 
 
     @Test
-    fun `Should update Item When Item exists`(){
+    fun `Should update Item When Item exists`() {
         val item = buildItem()
         val itemRequest = buildAlternativeItemRequest().toDomain()
         val modifiedItem = buildModifiedItem()
@@ -95,20 +96,20 @@ class ItemServiceTest {
     }
 
     @Test
-    fun `Should return ItemNotFoundException When try to update an Item that does not exists`(){
+    fun `Should return ItemNotFoundException When try to update an Item that does not exists`() {
         val itemRequest = buildAlternativeItemRequest().toDomain()
         given(itemRepository.findById(ITEM_DEFAULT_ID)).willReturn(Mono.empty())
 
         StepVerifier.create(itemService.update(ITEM_DEFAULT_ID, itemRequest))
             .expectNextCount(0)
-            .expectErrorMatches{
+            .expectErrorMatches {
                 it is ItemNotFoundException && it.message == ErrorCode.ITEM_NOT_FOUND
             }
             .verify()
     }
 
     @Test
-    fun `Should delete Item When Item exists`(){
+    fun `Should delete Item When Item exists`() {
         val item = buildItem()
         given(itemRepository.findById(ITEM_DEFAULT_ID)).willReturn(Mono.just(item))
         given(itemRepository.deleteById(ITEM_DEFAULT_ID)).willReturn(Mono.empty())
@@ -119,12 +120,12 @@ class ItemServiceTest {
     }
 
     @Test
-    fun `Should return ItemNotFoundException When try to delete an Item that does not exists`(){
+    fun `Should return ItemNotFoundException When try to delete an Item that does not exists`() {
         given(itemRepository.findById(ITEM_DEFAULT_ID)).willReturn(Mono.empty())
 
         StepVerifier.create(itemService.delete(ITEM_DEFAULT_ID))
             .expectNextCount(0)
-            .expectErrorMatches{
+            .expectErrorMatches {
                 it is ItemNotFoundException && it.message == ErrorCode.ITEM_NOT_FOUND
             }
             .verify()

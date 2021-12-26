@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("ITEM")
-data class Item (
+data class Item(
     @Id
     @Column("ID_ITEM")
     val id: Long?,
