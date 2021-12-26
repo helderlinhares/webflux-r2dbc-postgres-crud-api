@@ -5,7 +5,7 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/postgres
     username: ITEM_USER
-    password: Jv1XBJ@rq6J$
+    password: ITEM_PASS
   flyway:
     url: jdbc:postgresql://localhost:5432/postgres
     user: ${spring.r2dbc.username}

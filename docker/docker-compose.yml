@@ -6,7 +6,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-ITEM_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-Jv1XBJ@rq6J$}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ITEM_PASS}
     ports:
       - "5432:5432"
     restart: unless-stopped
