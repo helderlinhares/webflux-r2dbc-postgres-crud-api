@@ -36,17 +36,21 @@ dependencies {
 	testImplementation("junit:junit")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
+}
 
-	constraints {
-		implementation("org.apache.logging.log4j:log4j-core") {
-			version {
-				strictly("[2.17, 3[")
-				prefer("2.17.0")
-			}
-			because("CVE-2021-44228, CVE-2021-45046, CVE-2021-45105: Log4j vulnerable to remote code execution and other critical security vulnerabilities")
+configurations.all {
+	resolutionStrategy.eachDependency {
+		if (requested.group == "org.apache.logging.log4j") {
+			useVersion("2.17.0")
+			because("Fixes critical log4j vulnerability in 2.17.0")
+		}
+		if(requested.group == "ch.qos.logback") {
+			useVersion("1.2.9")
+			because("Fixes critical logback vulnerability in 1.2.9")
 		}
 	}
 }
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
